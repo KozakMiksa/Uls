@@ -19,32 +19,35 @@ int longestName(t_list *list) {
     return lenght;
 }
 
-void printMultiColum(t_list *namesDir, int winSize, int lenght, int sizeList) {
-    int countColums = winSize / lenght;
+void printNames(char *name, int longest) {
+    int sizeName = mx_strlen(name);
+
+    mx_printstr(name);
+    while (sizeName < longest) {
+        mx_printchar('\t');
+        sizeName = sizeName + 8;
+    }
+}
+
+void printMultiColum(t_list *namesDir, int winSize, int longest, int sizeList) {
+    int countColums = winSize / longest;
     int countStr = sizeList / countColums + ((sizeList % countColums) ? 1 : 0);
     t_list *nextData = NULL;
 
-    printf("%s %d\n %s %d\n", "1 countColums", countColums, "countStr", countStr);
-
     countColums = sizeList / countStr + ((sizeList % countStr) ? 1 : 0);
-    printf("%s %d\n\n", "2 countColums", countColums);
 
     for (int i = 0; i < countStr; i++) {
-        mx_printstr(namesDir->data);
-        mx_printchar('\t');
+        printNames(namesDir->data, longest);
         nextData = namesDir;
         for (int j = 0; j < countColums - 1; j++) {
             for (int k = 0; k < countStr; k++) {
-                if (nextData->next == NULL) {
-                    
-                }
-                else {
+                if (nextData != NULL) {
                     nextData = nextData->next;
                 }
             }
-            mx_printchar(j + 48);
-            mx_printstr(nextData->data);
-            mx_printchar('\t');
+            if (nextData != NULL) {
+                printNames(nextData->data, longest);
+            }
             
         }
         mx_printchar('\n');
@@ -91,18 +94,27 @@ static t_list *namesInList(char *argv) {
     DIR *dir;
     struct dirent *entry;
     t_list *namesDir = NULL;
+    int fd = open(argv, O_RDONLY);
+    
 
     dir = opendir(argv);
     if (!dir) {
-        perror("diropen");
-        exit(1);
+        if (fd > 0) {
+            namesDir = mx_create_node(argv);
+        }
+        else {
+            perror(mx_strjoin("uls: ", argv));
+            exit(1);
+        }
     }
-    while ( (entry = readdir(dir)) != NULL) {
-        if (entry->d_name[0] != '.') {
-            if (namesDir == NULL)
-                namesDir = mx_create_node(entry->d_name);
-            else
-                mx_push_front(&namesDir, entry->d_name);
+    else {
+        while ( (entry = readdir(dir)) != NULL) {
+            if (entry->d_name[0] != '.') {
+                if (namesDir == NULL)
+                    namesDir = mx_create_node(entry->d_name);
+                else
+                    mx_push_front(&namesDir, entry->d_name);
+            }
         }
     }
     closedir(dir);
