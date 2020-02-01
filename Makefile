@@ -5,10 +5,12 @@ CFLAGS = -std=c11 -Wall -Wextra -Wpedantic -Werror
 INC = uls.h
 
 SRC = main.c \
-mx_asciiSort.c
+mx_asciiSort.c \
+mx_uls_l.c
 
 OBJ = main.o \
-mx_asciiSort.o
+mx_asciiSort.o \
+mx_uls_l.o
 
 all: install clean
 
