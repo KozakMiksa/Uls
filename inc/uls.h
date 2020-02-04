@@ -3,6 +3,7 @@
 
 #include "libmx/inc/libmx.h"
 #include <dirent.h>
+#include <time.h>
 
 #include <sys/types.h>
 #include <sys/ioctl.h>
