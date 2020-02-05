@@ -2,7 +2,7 @@
 
 static t_list *namesInList(char *argv);
 
-int longestName(t_list *list) {
+int longestName(t_list *list) { // определяю самое длинное слово + размер столбца
     int lenght = 0;
     int tmp = 0;
 
@@ -76,16 +76,17 @@ int main(int argc, char *argv[]) {
 
     if (argc == 2) {
         filesDir = namesInList(argv[1]);
+
         uls(filesDir);
     }
     else {
         filesDir = namesInList(argv[2]);
         while (filesDir != NULL) {
-            mx_uls_l(mx_asciiSort(filesDir));
+            mx_uls_l(mx_asciiSort(filesDir), argv[2]);
             filesDir = filesDir->next;
         }
     }
-    //system("leaks -q uls");
+    // system(  "leaks -q uls");
     return 0;
 }
 

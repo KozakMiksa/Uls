@@ -9,8 +9,7 @@ int strlen_mod(const char *s, char c)
     }
     return count;
 }
-char **mx_strsplit(const char *s, char c)
-{
+char **mx_strsplit(const char *s, char c) {
     if (s == NULL)
     {
 	return NULL;
