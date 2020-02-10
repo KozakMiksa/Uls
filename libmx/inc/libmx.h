@@ -19,6 +19,7 @@ int mx_strlen_my(const char *s, char c);
 bool mx_isalpha(char c);
 bool mx_isdigit(char c);
 int mx_atoi(char *s);
+int mx_get_index(char *str, char flag);
 // UTILS PACK
 void mx_printchar(char c);
 void mx_print_unicode(wchar_t c);

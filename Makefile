@@ -5,12 +5,53 @@ CFLAGS = -std=c11 -Wall -Wextra -Wpedantic -Werror
 INC = uls.h
 
 SRC = main.c \
-mx_asciiSort.c \
-mx_uls_l.c
+parsing.c \
+usage_error.c \
+select_flags.c \
+check_flags.c \
+select_flags_fifth.c \
+select_flags_first.c \
+select_flags_fourth.c \
+select_flags_second.c \
+select_flags_sixth.c \
+select_flags_third.c \
+\
+uls.c \
+for_big_r.c \
+no_such_file_or_dir.c \
+all_files.c \
+permission.c \
+all_directory.c \
+asciiSort.c \
+m_flag.c \
+big_c_flag.c \
+l_flag.c \
+one_flag.c \
 
 OBJ = main.o \
-mx_asciiSort.o \
-mx_uls_l.o
+parsing.o \
+usage_error.o \
+select_flags.o \
+check_flags.o \
+select_flags_fifth.o \
+select_flags_first.o \
+select_flags_fourth.o \
+select_flags_second.o \
+select_flags_sixth.o \
+select_flags_third.o \
+\
+uls.o \
+for_big_r.o\
+no_such_file_or_dir.o \
+all_files.o \
+permission.o \
+all_directory.o \
+asciiSort.o \
+m_flag.o \
+big_c_flag.o \
+l_flag.o \
+one_flag.o \
+
 
 all: install clean
 
