@@ -1,6 +1,5 @@
 #include "uls.h"
 
-static void find_flag_l_or_t(t_flags *true_flags, char *str);
 static char *str_with_true_flags(char **argv, int argc);
 static void print_usage_error(char **argv, int i, int k);
 static void create_matrix_of_flags(t_flags *true_flags);
@@ -11,7 +10,7 @@ t_list **mx_usage_error(int argc, char **argv, char *usage_flags) {
     t_flags true_flags;
 
     create_matrix_of_flags(&true_flags);
-    find_flag_l_or_t(&true_flags, str);
+    mx_who_last_flag_l_big_c_m_one(&true_flags, str);
     mx_strdel(&str);
     for (int i = 1; i < argc && x == 0; i++)
         if (argv[i][0] == '-' && argv[i][1] != '\0') {
@@ -79,24 +78,4 @@ static char *str_with_true_flags(char **argv, int argc) {
                     j++;
                 }
     return str;
-}
-
-static void find_flag_l_or_t(t_flags *true_flags, char *str) {
-    if (mx_get_index(str, 'l') > mx_get_index(str, 'C') &&
-        mx_get_index(str, 'l') > mx_get_index(str, '1') &&
-        mx_get_index(str, 'l') > mx_get_index(str, 'm')) 
-        true_flags->l = 1;
-    if ((mx_get_index(str, 't') != -1 || mx_get_index(str, 'l') != -1) &&
-        mx_get_index(str, 'u') != -1 && mx_get_index(str, 'c') == -1)
-        true_flags->u = 1;
-    if ((mx_get_index(str, 't') != -1 || mx_get_index(str, 'l') != -1) &&
-        mx_get_index(str, 'c') != -1 && mx_get_index(str, 'u') == -1)
-        true_flags->c = 1;
-    if ((mx_get_index(str, 't') != -1 || mx_get_index(str, 'l') != -1) &&
-        mx_get_index(str, 'c') != -1 && mx_get_index(str, 'u') != -1) {
-        if (true_flags->c != 1)
-            true_flags->u = 1;
-        if (true_flags->u != 1)
-            true_flags->c = 1;
-        }
 }

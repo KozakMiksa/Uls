@@ -9,8 +9,6 @@ void mx_check_flags_first(t_list **parser, t_flags *true_flags) {
         mx_push_back(&parser[0], "A");
     if (true_flags->l == 1)
         mx_push_back(&parser[0], "l");
-    if (true_flags->big_c == 0)
-        mx_pop_front(&parser[0]);
     if (true_flags->one == 1)
         mx_push_back(&parser[0], "1");
     if (true_flags->m == 1)
@@ -21,11 +19,11 @@ void mx_check_flags_first(t_list **parser, t_flags *true_flags) {
         mx_push_back(&parser[0], "@");
     if (true_flags->e == 1)
         mx_push_back(&parser[0], "e");
+    if (true_flags->big_t == 1)
+        mx_push_back(&parser[0], "T");
 }
 
 void mx_check_flags_second(t_list **parser, t_flags *true_flags) {
-    if (true_flags->big_t == 1)
-        mx_push_back(&parser[0], "T");
     if (true_flags->f == 1)
         mx_push_back(&parser[0], "f");
     if (true_flags->r == 1)
@@ -44,4 +42,6 @@ void mx_check_flags_second(t_list **parser, t_flags *true_flags) {
         mx_push_back(&parser[0], "F");
     if (true_flags->big_g == 1)
         mx_push_back(&parser[0], "G");
+    if (true_flags->big_c == 0)
+        mx_pop_front(&parser[0]);
 }
