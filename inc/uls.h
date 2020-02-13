@@ -41,13 +41,13 @@ typedef struct s_flags {
 } t_flags;
 
 t_list **mx_usage_error(int argc, char **argv, char *usage_flags);
-void mx_who_last_flag_l_big_c_m_one(t_flags *true_flags, char *str);
 void mx_select_flags(t_flags *true_flags, char flag);
 void mx_select_flags_first(t_flags *true_flags, char flag);
 void mx_select_flags_second(t_flags *true_flags, char flag);
 void mx_select_flags_third(t_flags *true_flags, char flag);
 void mx_select_flags_fourth(t_flags *true_flags, char flag);
 void mx_select_flags_fifth(t_flags *true_flags, char flag);
+void mx_select_flags_sixth(t_flags *true_flags, char flag);
 t_list **mx_parsing(int i, int argc, char **argv, t_flags *true_flags);
 void mx_check_flags_first(t_list **parser, t_flags *true_flags);
 void mx_check_flags_second(t_list **parser, t_flags *true_flags);
@@ -58,11 +58,16 @@ void mx_uls(t_list **parser);
   void mx_all_files(t_list *files, t_list *flags);
     void mx_l_flag(t_list *files, t_list *flags);
     void mx_big_c_flag(t_list *files, t_list *flags);
+
     void mx_one_flag(t_list *files, t_list *flags);
     void mx_m_flag(t_list *files, t_list *flags);
 void mx_permission(t_list *names);
 void mx_all_directory(t_list *dir, t_list *flags);
 
-t_list *mx_asciiSort(t_list *l);
+void mx_ascii_sort(t_list **l);
+void mx_select_sort(t_list **names, t_list *flags, char flag);
+char mx_get_flag(t_list *flags, char *corect_flags);
+void mx_mult_colum(t_list *names, int win_size, int longest, int size_list);
+void mx_r_sort(t_list **names);
 
 #endif

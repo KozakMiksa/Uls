@@ -28,16 +28,16 @@ void printNames(char *name, int longest) {
 }
 
 void mult_colum(t_list *namesDir, int winSize, int longest, int sizeList) {
-    int countColums = winSize / longest;
-    int countStr = sizeList / countColums + ((sizeList % countColums) ? 1 : 0);
+    int countColum = winSize / longest;
+    int countStr = sizeList / countColum + ((sizeList % countColum) ? 1 : 0);
     t_list *nextData = NULL;
 
-    countColums = sizeList / countStr + ((sizeList % countStr) ? 1 : 0);
+    countColum = sizeList / countStr + ((sizeList % countStr) ? 1 : 0);
 
     for (int i = 0; i < countStr; i++) {
-        printNames(namesDir->data, longest);
-        nextData = namesDir;
-        for (int j = 0; j < countColums - 1; j++) {
+        printNames(names->data, longest);
+        nextData = names;
+        for (int j = 0; j < countColum - 1; j++) {
             for (int k = 0; k < countStr; k++) {
                 if (nextData != NULL) {
                     nextData = nextData->next;
@@ -49,7 +49,7 @@ void mult_colum(t_list *namesDir, int winSize, int longest, int sizeList) {
             
         }
         mx_printchar('\n');
-        namesDir = namesDir->next;
+        names = names->next;
     } 
 }
 

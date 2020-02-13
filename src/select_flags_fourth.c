@@ -2,19 +2,19 @@
 
 void mx_select_flags_fourth(t_flags *true_flags, char flag) {
     switch(flag) {
-        case 'f':
-            true_flags->f = 1;
-            true_flags->a = 1;
-            true_flags->big_a = 0;
-            true_flags->r = 0;
-            true_flags->t = 0;
-            true_flags->big_s = 0;
+        case 'r':
+            if (true_flags->f != 1)
+                true_flags->r = 1;
             break ;
-        case 'R':
-            true_flags->big_r = 1;
+        case 't':
+            if (true_flags->big_s != 1 && true_flags->f != 1)
+                true_flags->t = 1;
             break ;
-        case 'G':
-            true_flags->big_g = 1;
+        case 'S':
+            if (true_flags->f != 1) {
+                true_flags->big_s = 1;
+                true_flags->t = 0;
+            }
             break ;
     }
 }

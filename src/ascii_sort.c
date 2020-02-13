@@ -1,8 +1,8 @@
 #include "uls.h"
 
-t_list *mx_asciiSort(t_list *l) {
+void mx_ascii_sort(t_list **l) {
     char *tmp = NULL;
-    t_list *list = l;
+    t_list *list = *l;
 
     for (t_list *i = list; i->next != NULL; i = i->next) {
         for (t_list *j = list; j->next != NULL; j = j->next) {
@@ -13,5 +13,4 @@ t_list *mx_asciiSort(t_list *l) {
             }
         }
     }
-    return list;
 }
