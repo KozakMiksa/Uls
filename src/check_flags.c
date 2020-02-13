@@ -13,12 +13,12 @@ void mx_check_flags_first(t_list **parser, t_flags *true_flags) {
         mx_push_back(&parser[0], "1");
     if (true_flags->m == 1)
         mx_push_back(&parser[0], "m");
+    if (true_flags->n == 1)
+        mx_push_back(&parser[0], "n");
+    if (true_flags->o == 1)
+        mx_push_back(&parser[0], "o");
     if (true_flags->h == 1)
         mx_push_back(&parser[0], "h");
-    if (true_flags->dog == 1)
-        mx_push_back(&parser[0], "@");
-    if (true_flags->e == 1)
-        mx_push_back(&parser[0], "e");
     if (true_flags->big_t == 1)
         mx_push_back(&parser[0], "T");
 }
@@ -40,8 +40,6 @@ void mx_check_flags_second(t_list **parser, t_flags *true_flags) {
         mx_push_back(&parser[0], "p");
     if (true_flags->big_f == 1)
         mx_push_back(&parser[0], "F");
-    if (true_flags->big_g == 1)
-        mx_push_back(&parser[0], "G");
     if (true_flags->big_c == 0)
         mx_pop_front(&parser[0]);
 }
