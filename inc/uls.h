@@ -41,13 +41,13 @@ typedef struct s_flags {
 } t_flags;
 
 t_list **mx_usage_error(int argc, char **argv, char *usage_flags);
+void mx_who_last_flag_l_big_c_m_one(t_flags *true_flags, char *str);
 void mx_select_flags(t_flags *true_flags, char flag);
 void mx_select_flags_first(t_flags *true_flags, char flag);
 void mx_select_flags_second(t_flags *true_flags, char flag);
 void mx_select_flags_third(t_flags *true_flags, char flag);
 void mx_select_flags_fourth(t_flags *true_flags, char flag);
 void mx_select_flags_fifth(t_flags *true_flags, char flag);
-void mx_select_flags_sixth(t_flags *true_flags, char flag);
 t_list **mx_parsing(int i, int argc, char **argv, t_flags *true_flags);
 void mx_check_flags_first(t_list **parser, t_flags *true_flags);
 void mx_check_flags_second(t_list **parser, t_flags *true_flags);
