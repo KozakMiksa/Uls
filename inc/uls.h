@@ -65,7 +65,6 @@ void mx_all_directory(t_list *dir, t_list *flags);
 
 void mx_ascii_sort(t_list **l);
 char mx_get_flag(t_list *flags, char *corect_flags, char default_f);
-char mx_get_flag(t_list *flags, char *corect_flags, char default_f);
 void mx_mult_colum(t_list *names, int win_size, int longest, int size_list);
 void mx_r_sort(t_list **names);
 
