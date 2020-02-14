@@ -1,7 +1,7 @@
 #include "uls.h"
 
 void mx_all_files(t_list *files, t_list *flags) {
-    char flag = mx_get_flag(flags, "l1m");
+    char flag = mx_get_flag(flags, "l1m", 'C');
 
     if (files != NULL)
         switch (flag) {
