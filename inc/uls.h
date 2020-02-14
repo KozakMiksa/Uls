@@ -39,6 +39,11 @@ typedef struct s_flags {
     int n;
 } t_flags;
 
+typedef struct s_size {
+    char *name;
+    int size;
+} t_size;
+
 t_list **mx_usage_error(int argc, char **argv, char *usage_flags);
 void mx_principal_printable_flag(t_flags *true_flags, char *str);
 void mx_select_flags(t_flags *true_flags, char flag);
@@ -51,13 +56,14 @@ t_list **mx_parsing(int i, int argc, char **argv, t_flags *true_flags);
 void mx_check_flags_first(t_list **parser, t_flags *true_flags);
 void mx_check_flags_second(t_list **parser, t_flags *true_flags);
 
+void mx_size_sort(t_list **names);
+
 void mx_uls(t_list **parser);
   void mx_for_big_r(t_list ***parser);
   void mx_no_such_file_or_dir(t_list *names);
   void mx_all_files(t_list *files, t_list *flags);
     void mx_l_flag(t_list *files, t_list *flags);
     void mx_big_c_flag(t_list *files, t_list *flags);
-
     void mx_one_flag(t_list *files, t_list *flags);
     void mx_m_flag(t_list *files, t_list *flags);
 void mx_permission(t_list *names);
