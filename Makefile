@@ -14,7 +14,7 @@ select_flags_second.c \
 select_flags_third.c \
 select_flags_fourth.c \
 select_flags_fifth.c \
-who_last_flag_l_big_c_m_one.c \
+principal_printable_flag.c \
 \
 uls.c \
 for_big_r.c \
@@ -42,7 +42,7 @@ select_flags_second.o \
 select_flags_third.o \
 select_flags_fourth.o \
 select_flags_fifth.o \
-who_last_flag_l_big_c_m_one.o \
+principal_printable_flag.o \
 \
 uls.o \
 for_big_r.o\

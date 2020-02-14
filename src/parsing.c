@@ -1,7 +1,7 @@
 #include "uls.h"
 
 static void add_to_parser(char *argv, t_list **parser, int k);
-// static void print_parser(t_list **parser);
+static void print_parser(t_list **parser);
 static void distributor(char *argv, t_list **parser);
 
 t_list **mx_parsing(int i, int argc, char **argv, t_flags *true_flags) {
@@ -17,7 +17,7 @@ t_list **mx_parsing(int i, int argc, char **argv, t_flags *true_flags) {
     else
         for (; i < argc; i++)
             distributor(argv[i], parser);
-    // print_parser(parser);
+    print_parser(parser);
     return parser;
 }
 
@@ -46,16 +46,16 @@ static void distributor(char *argv, t_list **parser) {
         add_to_parser(argv, parser, 4);
 }
 
-// static void print_parser(t_list **parser) {
-//     for (int i = 0; i < 5; i++) {
-//         mx_printstr("Potok ");
-//         mx_printint(i);
-//         mx_printchar('\n');
-//         while (parser[i] != NULL) {
-//             mx_printstr(parser[i]->data);
-//             mx_printchar(' ');
-//             parser[i] = parser[i]->next;
-//         }
-//         mx_printchar('\n');
-//     }
-// }
+static void print_parser(t_list **parser) {
+    for (int i = 0; i < 5; i++) {
+        mx_printstr("Potok ");
+        mx_printint(i);
+        mx_printchar('\n');
+        while (parser[i] != NULL) {
+            mx_printstr(parser[i]->data);
+            mx_printchar(' ');
+            parser[i] = parser[i]->next;
+        }
+        mx_printchar('\n');
+    }
+}

@@ -13,8 +13,8 @@ void mx_select_flags_fourth(t_flags *true_flags, char flag) {
         case 'R':
             true_flags->big_r = 1;
             break;
-        case 'G':
-            true_flags->big_g = 1;
-            break;
+        // case 'G':
+        //     true_flags->big_g = 1;
+        //     break;
     }
 }

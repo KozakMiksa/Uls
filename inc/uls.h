@@ -24,10 +24,7 @@ typedef struct s_flags {
     int one;
     int big_r;
     int big_a;
-    int big_g;
     int h;
-    int dog;
-    int e;
     int big_t;
     int big_c;
     int big_f;
@@ -38,10 +35,12 @@ typedef struct s_flags {
     int u;
     int c;
     int big_s;
+    int o;
+    int n;
 } t_flags;
 
 t_list **mx_usage_error(int argc, char **argv, char *usage_flags);
-void mx_who_last_flag_l_big_c_m_one(t_flags *true_flags, char *str);
+void mx_principal_printable_flag(t_flags *true_flags, char *str);
 void mx_select_flags(t_flags *true_flags, char flag);
 void mx_select_flags_first(t_flags *true_flags, char flag);
 void mx_select_flags_second(t_flags *true_flags, char flag);

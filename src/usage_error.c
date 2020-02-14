@@ -10,7 +10,7 @@ t_list **mx_usage_error(int argc, char **argv, char *usage_flags) {
     t_flags true_flags;
 
     create_matrix_of_flags(&true_flags);
-    mx_who_last_flag_l_big_c_m_one(&true_flags, str);
+    mx_principal_printable_flag(&true_flags, str);
     mx_strdel(&str);
     for (int i = 1; i < argc && x == 0; i++)
         if (argv[i][0] == '-' && argv[i][1] != '\0') {
@@ -34,10 +34,7 @@ static void create_matrix_of_flags(t_flags *true_flags) {
     true_flags->one = 0;
     true_flags->big_r = 0;
     true_flags->big_a = 0;
-    true_flags->big_g = 0;
     true_flags->h = 0;
-    true_flags->dog = 0;
-    true_flags->e = 0;
     true_flags->big_t = 0;
     true_flags->big_c = 0;
     true_flags->big_f = 0;
@@ -48,12 +45,14 @@ static void create_matrix_of_flags(t_flags *true_flags) {
     true_flags->u = 0;
     true_flags->c = 0;
     true_flags->big_s = 0;
+    true_flags->o = 0;
+    true_flags->n = 0;
 }
 
 static void print_usage_error(char **argv, int i, int k) {
     write(2, "uls: illegal option -- ", 23);
     write(2, &argv[i][k], 1);
-    write(2, "\nusage: uls [-ACFGRSTacefhlmprtu1@] [file ...]\n", 47);
+    write(2, "\nusage: uls [-ACFRSTacfhlmnoprtu1] [file ...]\n", 46);
     exit(0);
 }
 
