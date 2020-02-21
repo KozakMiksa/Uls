@@ -9,7 +9,7 @@ void mx_all_files(t_list *files, t_list *flags) {
         switch (flag) {
         case 'l':
             mx_l_flag(files, flags);
-                break;
+            break;
         case 'C':
             mx_big_c_flag(files, flags, ws.ws_col);
             break;

@@ -26,6 +26,8 @@ void mx_big_c_flag(t_list *files, t_list *flags, int ws_size) {
     if (mx_get_flag(flags, "r", 'C') == 'r')
         mx_r_sort(&files);
     mx_mult_colum(files, ws_size, lenght, size_list);
-    while (files != NULL)
+    while (files != NULL) {
+        free(files->data);
         mx_pop_front(&files);
+    }
 }

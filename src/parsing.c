@@ -22,10 +22,9 @@ t_list **mx_parsing(int i, int argc, char **argv, t_flags *true_flags) {
 }
 
 static void add_to_parser(char *argv, t_list **parser, int k) {
-    if (parser[k] == NULL)
-        parser[k] = mx_create_node(argv);
-    else
-        mx_push_back(&parser[k], argv);
+    char *str = mx_strdup(argv);
+
+    mx_push_back(&parser[k], str);
 }
 
 static void distributor(char *argv, t_list **parser) {

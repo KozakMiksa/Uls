@@ -8,7 +8,6 @@ void mx_r_sort(t_list **names) {
             tmp = mx_create_node((*names)->data);
         else
             mx_push_front(&tmp, (*names)->data);
-
         mx_pop_front(names);
     }
     *names = tmp;

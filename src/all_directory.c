@@ -3,21 +3,27 @@
 static void default_flag(char *name, t_list **names_dir) {
     DIR *dir;
     struct dirent *entry;
+    char *str = NULL;
 
     dir = opendir(name);
     while ( (entry = readdir(dir)) != NULL)
-        if (entry->d_name[0] != '.') 
-            mx_push_back(names_dir, entry->d_name);
+        if (entry->d_name[0] != '.') {
+        	str = mx_strdup(entry->d_name);
+            mx_push_back(names_dir, str);
+        }
     closedir(dir);
 }
 
 static void a_flag(char *name, t_list **names_dir) {
     DIR *dir;
     struct dirent *entry;
+    char *str = NULL;
 
     dir = opendir(name);
-    while ((entry = readdir(dir)) != NULL)
-        mx_push_back(names_dir, entry->d_name);
+    while ((entry = readdir(dir)) != NULL) {
+        str = mx_strdup(entry->d_name);
+        mx_push_back(names_dir, str);
+    }
     closedir(dir);
 }
 
@@ -25,11 +31,14 @@ static void big_a_flag(char *name, t_list **names_dir) {
     DIR *dir;
     struct dirent *entry;
     int stop_flag = 0;
+    char *str = NULL;
 
     dir = opendir(name);
     while ((entry = readdir(dir)) != NULL) {
-        if (stop_flag > 1)
-            mx_push_back(names_dir, entry->d_name);
+        if (stop_flag > 1) {
+            str = mx_strdup(entry->d_name);
+            mx_push_back(names_dir, str);
+        }
         stop_flag++;
     }
     closedir(dir);

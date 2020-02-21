@@ -6,16 +6,31 @@
 #include <time.h>
 #include <pwd.h>
 #include <errno.h>
-//#include <string.h>
 
 #include <sys/types.h>
 #include <sys/ioctl.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 
-#define MX_ISVTX 00001
-#define MX_ISGID 02000
-#define MX_ISUID 04000
+#define MX_ISREG 0100000
+#define MX_ISDIR 0040000
+#define MX_ISCHR 0020000
+#define MX_ISBLK 0060000
+#define MX_ISFIFO 0010000
+#define MX_ISLNK 0120000
+#define MX_SOCK 0140000
+
+#define MX_IRUSR 00400
+#define MX_IWUSR 00200
+#define MX_IXUSR 00100
+
+#define MX_IRGRP 00040
+#define MX_IWGRP 00020
+#define MX_IXGRP 00010
+
+#define MX_IROTH 00004
+#define MX_IWOTH 00002
+#define MX_IXOTH 00001
 
 typedef struct s_flags {
     int a;
