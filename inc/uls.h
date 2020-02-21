@@ -63,9 +63,11 @@ void mx_uls(t_list **parser);
   void mx_no_such_file_or_dir(t_list *names);
   void mx_all_files(t_list *files, t_list *flags);
     void mx_l_flag(t_list *files, t_list *flags);
-    void mx_big_c_flag(t_list *files, t_list *flags);
+
+    void mx_big_c_flag(t_list *files, t_list *flags, int ws_size);
+
     void mx_one_flag(t_list *files, t_list *flags);
-    void mx_m_flag(t_list *files, t_list *flags);
+    void mx_m_flag(t_list *files, t_list *flags, int ws_size);
 void mx_permission(t_list *names);
 void mx_all_directory(t_list *dir, t_list *flags);
 
