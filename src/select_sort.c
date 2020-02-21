@@ -13,7 +13,7 @@ void mx_select_sort(t_list **names, t_list *flags, char flag) {
             write(1, "t\n", 2);
             break ;
         case 'S':
-            write(1, "S\n", 2);
+            mx_size_sort(names);
             break ;
         default:
             ;

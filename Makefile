@@ -15,6 +15,7 @@ select_flags_third.c \
 select_flags_fourth.c \
 select_flags_fifth.c \
 principal_printable_flag.c \
+size_sort.c \
 \
 uls.c \
 for_big_r.c \
@@ -43,6 +44,7 @@ select_flags_third.o \
 select_flags_fourth.o \
 select_flags_fifth.o \
 principal_printable_flag.o \
+size_sort.o \
 \
 uls.o \
 for_big_r.o\
