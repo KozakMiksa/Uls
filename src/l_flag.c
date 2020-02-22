@@ -91,8 +91,8 @@ static char *path_to_dir(char *str, char *argv) { // хрень для доба�
 
 void mx_l_flag(t_list *files, t_list *flags, char *dir) {
     struct stat buff;
-	t_list *cp_files = files;
-	int total = 0;
+	// t_list *cp_files = files;
+	// int total = 0;
 	char *str = NULL;
 
 	mx_select_sort(&files, flags, mx_get_flag(flags, "ftS", 'C'), dir);
@@ -100,18 +100,18 @@ void mx_l_flag(t_list *files, t_list *flags, char *dir) {
         mx_r_sort(&files);
 
 /////////////////////////////////////////
-    while (cp_files != NULL) {
-    	if (dir != NULL)
-            str = path_to_dir(cp_files->data, dir);
-        else
-        	str = cp_files->data;
-    	stat(str, &buff);
-    	total += buff.st_blocks;
-    	cp_files = cp_files->next;
-    }
-    mx_printstr("total ");
-    mx_printint(total);
-    mx_printchar('\n');
+    // while (cp_files != NULL) {
+    // 	if (dir != NULL)
+    //         str = path_to_dir(cp_files->data, dir);
+    //     else
+    //     	str = cp_files->data;
+    // 	stat(str, &buff);
+    // 	total += buff.st_blocks;
+    // 	cp_files = cp_files->next;
+    // }
+    // mx_printstr("total ");
+    // mx_printint(total);
+    // mx_printchar('\n');
 /////////////////////////////////////////
 
     while (files != NULL) {
