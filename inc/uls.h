@@ -39,6 +39,8 @@
 #define MX_IWOTH 00002
 #define MX_IXOTH 00001
 
+#define MX_IFMT 0170000
+
 typedef struct s_flags {
     int a;
     int f;

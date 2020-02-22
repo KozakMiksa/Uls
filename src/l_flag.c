@@ -1,20 +1,20 @@
 #include "uls.h"
 
 static void dir_or_not(struct stat *buff) {
-    if (buff->st_mode & MX_ISREG)
-    	mx_printchar('-');
-    else if (buff->st_mode & MX_ISDIR)
-    	mx_printchar('d');
-    else if (buff->st_mode & MX_ISCHR)
-    	mx_printchar('c');
-    else if (buff->st_mode & MX_ISBLK)
-    	mx_printchar('b');
-    else if (buff->st_mode & MX_ISFIFO)
-    	mx_printchar('f');
-    else if (buff->st_mode & MX_ISLNK)
-    	mx_printchar('l');
-    else if (buff->st_mode & MX_SOCK)
-    	mx_printchar('s');
+    if ((buff->st_mode & MX_IFMT) == MX_ISREG)
+        mx_printchar('-');
+    else if ((buff->st_mode & MX_IFMT) == MX_ISDIR)
+        mx_printchar('d');
+    else if ((buff->st_mode & MX_IFMT) == MX_ISCHR)
+        mx_printchar('c');
+    else if ((buff->st_mode & MX_IFMT) == MX_ISBLK)
+        mx_printchar('b');
+    else if ((buff->st_mode & MX_IFMT) == MX_ISFIFO)
+        mx_printchar('f');
+    else if ((buff->st_mode & MX_IFMT) == MX_ISLNK)
+        mx_printchar('l');
+    else if ((buff->st_mode & MX_IFMT) == MX_SOCK)
+        mx_printchar('s');
 }
 
 static void socets(struct stat *buff) {
@@ -58,13 +58,13 @@ static void socets(struct stat *buff) {
 }
 
 static void attributes_and_acl(char *files) {
+    int xattr = listxattr(files, NULL, 0, XATTR_NOFOLLOW);
     acl_t acl = acl_get_file(files, ACL_TYPE_EXTENDED);
-    ssize_t xattr = listxattr(files, NULL, 0, XATTR_NOFOLLOW);
 
-    if (acl != NULL) 
-        mx_printchar('+');
-    else if (xattr > 0)
+    if (xattr > 0)
         mx_printchar('@');
+    else if (acl != NULL) 
+        mx_printchar('+');
     else
         mx_printchar(' ');
     acl_free(acl);
@@ -119,12 +119,12 @@ void mx_l_flag(t_list *files, t_list *flags, char *dir) {
             str = path_to_dir(files->data, dir);
         else
         	str = files->data;
-        stat(str, &buff);
+        lstat(str, &buff);
         socets(&buff);
-        attributes_and_acl(files->data);
+        attributes_and_acl(str);
         mx_printchar(' ');
-    mx_printstr(files->data);
-    mx_printchar('\n');
+        mx_printstr(files->data);
+        mx_printchar('\n');
         files = files->next;
     }
 }
