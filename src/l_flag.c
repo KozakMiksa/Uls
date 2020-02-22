@@ -18,16 +18,56 @@ static void dir_or_not(struct stat *buff) {
 }
 
 static void socets(struct stat *buff) {
-	dir_or_not(buff);
+    dir_or_not(buff);
     (MX_IRUSR & buff->st_mode) ? mx_printchar('r') : mx_printchar('-');
     (MX_IWUSR & buff->st_mode) ? mx_printchar('w') : mx_printchar('-');
-    (MX_IXUSR & buff->st_mode) ? mx_printchar('x') : mx_printchar('-');
+    if (MX_ISUID & buff->st_mode) 
+        if (MX_IXUSR & buff->st_mode)
+            mx_printchar('s');
+        else
+            mx_printchar('S');  
+    else     
+        if (MX_IXUSR & buff->st_mode)
+            mx_printchar('x');
+        else
+            mx_printchar('-');  
     (MX_IRGRP & buff->st_mode) ? mx_printchar('r') : mx_printchar('-');
     (MX_IWGRP & buff->st_mode) ? mx_printchar('w') : mx_printchar('-');
-    (MX_IXGRP & buff->st_mode) ? mx_printchar('x') : mx_printchar('-');
+    if (MX_ISGID & buff->st_mode) 
+        if (MX_IXGRP & buff->st_mode)
+            mx_printchar('s');
+        else
+            mx_printchar('S');  
+    else     
+        if (MX_IXGRP & buff->st_mode)
+            mx_printchar('x');
+        else
+            mx_printchar('-'); 
     (MX_IROTH & buff->st_mode) ? mx_printchar('r') : mx_printchar('-');
     (MX_IWOTH & buff->st_mode) ? mx_printchar('w') : mx_printchar('-');
-    (MX_IXOTH & buff->st_mode) ? mx_printchar('x') : mx_printchar('-');
+    if (MX_ISVTX & buff->st_mode) 
+        if (MX_IXOTH & buff->st_mode)
+            mx_printchar('t');
+        else
+            mx_printchar('T');  
+    else     
+        if (MX_IXOTH & buff->st_mode)
+            mx_printchar('x');
+        else
+            mx_printchar('-'); 
+}
+
+static void attributes_and_acl(char *files) {
+    acl_t acl = acl_get_file(files, ACL_TYPE_EXTENDED);
+    ssize_t xattr = listxattr(files, NULL, 0, XATTR_NOFOLLOW);
+
+    if (acl != NULL) 
+        mx_printchar('+');
+    else if (xattr > 0)
+        mx_printchar('@');
+    else
+        mx_printchar(' ');
+    acl_free(acl);
 }
 
 static char *path_to_dir(char *str, char *argv) { // хрень для добавления слеша в конце
@@ -81,6 +121,7 @@ void mx_l_flag(t_list *files, t_list *flags, char *dir) {
         	str = files->data;
         stat(str, &buff);
         socets(&buff);
+        attributes_and_acl(files->data);
         mx_printchar(' ');
     mx_printstr(files->data);
     mx_printchar('\n');
