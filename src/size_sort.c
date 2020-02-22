@@ -1,9 +1,9 @@
 #include "uls.h"
 
-static void get_size(t_list **names, int list_size) {
+static void get_size(t_list **names, int list_size, char *dir) {
     struct stat buff;
     t_size *with_s = malloc(sizeof(t_size) * list_size);
-
+dir = NULL; /////////////////////////////////////////////////////////////////////////
     for (int i = 0; i < list_size; i++) {
         stat((*names)->data, &buff);
         with_s[i].name = (*names)->data;
@@ -13,12 +13,12 @@ static void get_size(t_list **names, int list_size) {
     }
 }
 
-void mx_size_sort(t_list **names) {
+void mx_size_sort(t_list **names, char *dir) {
     t_size *tmp = NULL;
     t_list *list = *names;
     int list_size = mx_list_size(*names);
 
-    get_size(names, list_size);
+    get_size(names, list_size, dir);
     for (t_list *i = list; i->next != NULL; i = i->next) {
         for (t_list *j = list; j->next != NULL; j = j->next) {
             if (((t_size *)(j)->data)->size < ((t_size *)(j)->next->data)->size) {

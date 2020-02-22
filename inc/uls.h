@@ -71,23 +71,23 @@ t_list **mx_parsing(int i, int argc, char **argv, t_flags *true_flags);
 void mx_check_flags_first(t_list **parser, t_flags *true_flags);
 void mx_check_flags_second(t_list **parser, t_flags *true_flags);
 
-void mx_size_sort(t_list **names);
+void mx_size_sort(t_list **names, char *dir);
 
 void mx_uls(t_list **parser);
   void mx_for_big_r(t_list ***parser);
   void mx_no_such_file_or_dir(t_list *names);
-  void mx_all_files(t_list *files, t_list *flags);
-    void mx_l_flag(t_list *files, t_list *flags);
+  void mx_all_files(t_list *files, t_list *flags, char *dir);
+    void mx_l_flag(t_list *files, t_list *flags, char *dir);
 
-    void mx_big_c_flag(t_list *files, t_list *flags, int ws_size);
+    void mx_big_c_flag(t_list *files, t_list *flags, int ws_size, char *dir);
 
-    void mx_one_flag(t_list *files, t_list *flags);
-    void mx_m_flag(t_list *files, t_list *flags, int ws_size);
+    void mx_one_flag(t_list *files, t_list *flags, char *dir);
+    void mx_m_flag(t_list *files, t_list *flags, int ws_size, char *dir);
 void mx_permission(t_list *names);
 void mx_all_directory(t_list *dir, t_list *flags);
 
 void mx_ascii_sort(t_list **l);
-void mx_select_sort(t_list **names, t_list *flags, char flag);
+void mx_select_sort(t_list **names, t_list *flags, char flag, char *dir);
 char mx_get_flag(t_list *flags, char *corect_flags, char default_f);
 void mx_mult_colum(t_list *names, int win_size, int longest, int size_list);
 void mx_r_sort(t_list **names);

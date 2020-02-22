@@ -21,10 +21,10 @@ static void print_flag_m(t_list *files, int ws_size) {
     }
 }
 
-void mx_m_flag(t_list *files, t_list *flags, int ws_size) {
+void mx_m_flag(t_list *files, t_list *flags, int ws_size, char *dir) {
     char flag = mx_get_flag(flags, "ftS", 'C');
 
-    mx_select_sort(&files, flags, flag);
+    mx_select_sort(&files, flags, flag, dir);
     if (mx_get_flag(flags, "r", 'C') == 'r')
         mx_r_sort(&files);
     print_flag_m(files, ws_size);

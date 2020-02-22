@@ -1,9 +1,9 @@
 #include "uls.h"
 
-void mx_select_sort(t_list **names, t_list *flags, char flag) { 
-    	char str;
-    	if (flags != NULL)
-    		str = flag;
+void mx_select_sort(t_list **names, t_list *flags, char flag, char *dir) { 
+        char str;
+        if (flags != NULL)
+            str = flag;
 
     switch (flag) {
         case 'C':
@@ -13,7 +13,7 @@ void mx_select_sort(t_list **names, t_list *flags, char flag) {
             write(1, "t\n", 2);
             break;
         case 'S':
-            mx_size_sort(names);
+            mx_size_sort(names, dir);
             break;
         default:
             ;

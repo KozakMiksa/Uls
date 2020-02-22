@@ -30,17 +30,42 @@ static void socets(struct stat *buff) {
     (MX_IXOTH & buff->st_mode) ? mx_printchar('x') : mx_printchar('-');
 }
 
-void mx_l_flag(t_list *files, t_list *flags) {
+static char *path_to_dir(char *str, char *argv) { // хрень для добавления слеша в конце
+    int i = 0;
+    char *trs = NULL;
+
+    for (; str[i + 1] != '\0'; i++);
+    if (argv[0] != '.') {
+        if (str[i] == '/') {
+            trs = mx_strjoin(argv, str);
+        }
+        else {
+    	    trs = mx_strjoin(mx_strcat(argv, "/"), str);
+        }
+    }
+    else {
+    	trs = str;
+    }
+    return trs;
+}
+
+void mx_l_flag(t_list *files, t_list *flags, char *dir) {
     struct stat buff;
 	t_list *cp_files = files;
 	int total = 0;
+	char *str = NULL;
 
-	mx_select_sort(&files, flags, mx_get_flag(flags, "ftS", 'C'));
+	mx_select_sort(&files, flags, mx_get_flag(flags, "ftS", 'C'), dir);
 	if (mx_get_flag(flags, "r", 'C') == 'r')
         mx_r_sort(&files);
+
 /////////////////////////////////////////
     while (cp_files != NULL) {
-    	stat(cp_files->data, &buff);
+    	if (dir != NULL)
+            str = path_to_dir(cp_files->data, dir);
+        else
+        	str = cp_files->data;
+    	stat(str, &buff);
     	total += buff.st_blocks;
     	cp_files = cp_files->next;
     }
@@ -48,8 +73,13 @@ void mx_l_flag(t_list *files, t_list *flags) {
     mx_printint(total);
     mx_printchar('\n');
 /////////////////////////////////////////
+
     while (files != NULL) {
-        stat(files->data, &buff);
+    	if (dir != NULL)
+            str = path_to_dir(files->data, dir);
+        else
+        	str = files->data;
+        stat(str, &buff);
         socets(&buff);
         mx_printchar(' ');
     mx_printstr(files->data);
