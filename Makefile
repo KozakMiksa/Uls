@@ -80,6 +80,7 @@ uninstall: clean
 
 clean: 
 	@make clean -sC libmx
-	@rm -rf $(INC) $(SRC) ./obj
+	@rm -rf $(INC) $(SRC) 
+	@rm -rf ./obj
 
 reinstall: uninstall install

@@ -1,20 +1,21 @@
 #include "uls.h"
 
 static void dir_or_not(struct stat *buff) {
-    if (buff->st_mode & MX_ISREG)
+    if ((buff->st_mode & MX_IFMT) == MX_ISREG)
     	mx_printchar('-');
-    else if (buff->st_mode & MX_ISDIR)
+    else if ((buff->st_mode & MX_IFMT) == MX_ISDIR)
     	mx_printchar('d');
-    else if (buff->st_mode & MX_ISCHR)
+    else if ((buff->st_mode & MX_IFMT) == MX_ISCHR)
     	mx_printchar('c');
-    else if (buff->st_mode & MX_ISBLK)
+    else if ((buff->st_mode & MX_IFMT) == MX_ISBLK)
     	mx_printchar('b');
-    else if (buff->st_mode & MX_ISFIFO)
+    else if ((buff->st_mode & MX_IFMT) == MX_ISFIFO)
     	mx_printchar('f');
-    else if (buff->st_mode & MX_ISLNK)
+    else if ((buff->st_mode & MX_IFMT) == MX_ISLNK)
     	mx_printchar('l');
-    else if (buff->st_mode & MX_SOCK)
+    else if ((buff->st_mode & MX_IFMT) == MX_SOCK)
     	mx_printchar('s');
+
 }
 
 static void socets(struct stat *buff) {
@@ -65,7 +66,7 @@ void mx_l_flag(t_list *files, t_list *flags, char *dir) {
             str = path_to_dir(cp_files->data, dir);
         else
         	str = cp_files->data;
-    	stat(str, &buff);
+    	lstat(str, &buff);
     	total += buff.st_blocks;
     	cp_files = cp_files->next;
     }
@@ -79,7 +80,7 @@ void mx_l_flag(t_list *files, t_list *flags, char *dir) {
             str = path_to_dir(files->data, dir);
         else
         	str = files->data;
-        stat(str, &buff);
+        lstat(str, &buff);
         socets(&buff);
         mx_printchar(' ');
     mx_printstr(files->data);

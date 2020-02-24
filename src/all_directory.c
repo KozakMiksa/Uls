@@ -63,14 +63,11 @@ static t_list *names_in_list(char *name, char flag) {
 void mx_all_directory(t_list *dir, t_list *flags) {
     char flag = mx_get_flag(flags, "aA", 'C');
     t_list *names = NULL;
+    // int size = mx_list_size(dir);
 
     while (dir != NULL) {
-    	// mx_printstr(dir->data);
-    	// mx_printchar(':');
-     //    mx_printchar('\n');
         names = names_in_list(dir->data, flag);
         mx_all_files(names, flags, dir->data);
         dir = dir->next;
-        // mx_printchar('\n');
     }
 }
