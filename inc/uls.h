@@ -68,6 +68,11 @@ typedef struct s_size {
     int size;
 }              t_size;
 
+typedef struct s_time {
+    char *name;
+    int t;
+}              t_time;
+
 t_list **mx_usage_error(int argc, char **argv, char *usage_flags);
 void mx_principal_printable_flag(t_flags *true_flags, char *str);
 void mx_select_flags(t_flags *true_flags, char flag);
@@ -81,6 +86,7 @@ void mx_check_flags_first(t_list **parser, t_flags *true_flags);
 void mx_check_flags_second(t_list **parser, t_flags *true_flags);
 
 void mx_size_sort(t_list **names, char *dir);
+void mx_time_sort(t_list **names, char *dir, t_list *flags);
 
 void mx_uls(t_list **parser);
   void mx_for_big_r(t_list ***parser);
@@ -100,5 +106,6 @@ void mx_select_sort(t_list **names, t_list *flags, char flag, char *dir);
 char mx_get_flag(t_list *flags, char *corect_flags, char default_f);
 void mx_mult_colum(t_list *names, int win_size, int longest, int size_list);
 void mx_r_sort(t_list **names);
+char *mx_path_to_dir(char *str, char *argv);
 
 #endif
