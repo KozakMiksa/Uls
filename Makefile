@@ -34,6 +34,7 @@ get_flag.c \
 mult_colum.c \
 r_sort.c \
 path_to_dir.c \
+print_for_dir.c \
 
 OBJ = main.o \
 parsing.o \
@@ -65,6 +66,7 @@ get_flag.o \
 mult_colum.o \
 r_sort.o \
 path_to_dir.o \
+print_for_dir.o \
 
 
 all: install clean

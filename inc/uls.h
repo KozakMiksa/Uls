@@ -21,7 +21,7 @@
 #define MX_ISBLK 0060000
 #define MX_ISFIFO 0010000
 #define MX_ISLNK 0120000
-#define MX_SOCK 0140000
+#define MX_ISSOCK 0140000
 
 #define MX_ISUID 04000
 #define MX_ISGID 02000
@@ -107,5 +107,6 @@ char mx_get_flag(t_list *flags, char *corect_flags, char default_f);
 void mx_mult_colum(t_list *names, int win_size, int longest, int size_list);
 void mx_r_sort(t_list **names);
 char *mx_path_to_dir(char *str, char *argv);
+void mx_print_for_dir(t_list *files, t_list *flags, char *dir);
 
 #endif
