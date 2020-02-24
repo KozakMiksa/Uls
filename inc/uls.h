@@ -10,7 +10,10 @@
 #include <sys/types.h>
 #include <sys/ioctl.h>
 #include <sys/stat.h>
-#include <sys/types.h>
+#include <sys/xattr.h>
+#include <sys/acl.h>
+
+#define MX_HALF_YEAR 15724800
 
 #define MX_ISREG 0100000
 #define MX_ISDIR 0040000
@@ -19,6 +22,10 @@
 #define MX_ISFIFO 0010000
 #define MX_ISLNK 0120000
 #define MX_SOCK 0140000
+
+#define MX_ISUID 04000
+#define MX_ISGID 02000
+#define MX_ISVTX 01000
 
 #define MX_IRUSR 00400
 #define MX_IWUSR 00200
@@ -31,6 +38,8 @@
 #define MX_IROTH 00004
 #define MX_IWOTH 00002
 #define MX_IXOTH 00001
+
+#define MX_IFMT 0170000
 
 typedef struct s_flags {
     int a;
@@ -52,12 +61,12 @@ typedef struct s_flags {
     int big_s;
     int o;
     int n;
-} t_flags;
+}              t_flags;
 
 typedef struct s_size {
     char *name;
     int size;
-} t_size;
+}              t_size;
 
 t_list **mx_usage_error(int argc, char **argv, char *usage_flags);
 void mx_principal_printable_flag(t_flags *true_flags, char *str);
