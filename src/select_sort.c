@@ -10,7 +10,7 @@ void mx_select_sort(t_list **names, t_list *flags, char flag, char *dir) {
             mx_ascii_sort(names);
             break;
         case 't':
-            write(1, "t\n", 2);
+            mx_time_sort(names, dir, flags);
             break;
         case 'S':
             mx_size_sort(names, dir);

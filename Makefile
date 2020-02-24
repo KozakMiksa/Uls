@@ -16,6 +16,7 @@ select_flags_fourth.c \
 select_flags_fifth.c \
 principal_printable_flag.c \
 size_sort.c \
+time_sort.c \
 \
 uls.c \
 for_big_r.c \
@@ -32,6 +33,7 @@ select_sort.c \
 get_flag.c \
 mult_colum.c \
 r_sort.c \
+path_to_dir.c \
 
 OBJ = main.o \
 parsing.o \
@@ -45,6 +47,7 @@ select_flags_fourth.o \
 select_flags_fifth.o \
 principal_printable_flag.o \
 size_sort.o \
+time_sort.o \
 \
 uls.o \
 for_big_r.o\
@@ -61,6 +64,7 @@ select_sort.o \
 get_flag.o \
 mult_colum.o \
 r_sort.o \
+path_to_dir.o \
 
 
 all: install clean

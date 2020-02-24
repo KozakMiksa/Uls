@@ -124,7 +124,9 @@ void mx_l_flag(t_list *files, t_list *flags, char *dir) {
         attributes_and_acl(files->data);
         mx_printchar(' ');
     mx_printstr(files->data);
-    mx_printchar('\n');
+    mx_printchar(' ');   
+    printf("%s", ctime(&buff.st_mtime));
+    //mx_printchar('\n');
         files = files->next;
     }
 }
