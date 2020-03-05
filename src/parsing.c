@@ -34,6 +34,11 @@ static void distributor(char *argv, t_list **parser) {
     fd = open(argv, O_RDONLY);
     dir = opendir(argv);
     if (!dir) {
+        if (errno == EBADF) {
+            write(2, "uls: ", 5);
+            write(2, argv, mx_strlen(argv));
+            write(2, ": Bad file descriptor\n", 22);
+        }
         if (errno == ENOENT)
             add_to_parser(argv, parser, 1);
         if (fd > 0)
