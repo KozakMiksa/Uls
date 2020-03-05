@@ -5,8 +5,6 @@ void mx_all_files(t_list *files, t_list *flags, int flows) {
     char flag = mx_get_flag(flags, "l1m", 'C');
 
     ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
-    if (flows > 0 && files != NULL)
-        mx_printchar('\n');
     if (files != NULL)
         switch (flag) {
         case 'l':
@@ -21,4 +19,6 @@ void mx_all_files(t_list *files, t_list *flags, int flows) {
         case 'm':
              mx_m_flag(files, flags, ws.ws_col, NULL);
         }
+    if (flows > 0 && files != NULL)
+        mx_printchar('\n');
 }

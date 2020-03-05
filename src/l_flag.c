@@ -66,7 +66,7 @@ void mx_l_flag(t_list *files, t_list *flags, char *dir) {
             str = mx_path_to_dir(files->data, dir);
         else
         	str = files->data;
-        stat(str, &buff);
+        lstat(str, &buff);
         socets(&buff);
         attributes_and_acl(str);
         mx_printchar(' ');
