@@ -55,43 +55,23 @@ static void attributes_and_acl(char *files) {
 
 void mx_l_flag(t_list *files, t_list *flags, char *dir) {
     struct stat buff;
-	// t_list *cp_files = files;
-	// int total = 0;
 	char *str = NULL;
 
 	mx_select_sort(&files, flags, mx_get_flag(flags, "ftS", 'C'), dir);
 	if (mx_get_flag(flags, "r", 'C') == 'r')
         mx_r_sort(&files);
 
-/////////////////////////////////////////
-    // while (cp_files != NULL) {
-    // 	if (dir != NULL)
-    //         str = path_to_dir(cp_files->data, dir);
-    //     else
-    //     	str = cp_files->data;
-    // 	lstat(str, &buff);
-    // 	total += buff.st_blocks;
-    // 	cp_files = cp_files->next;
-    // }
-    // mx_printstr("total ");
-    // mx_printint(total);
-    // mx_printchar('\n');
-
-/////////////////////////////////////////
-
     while (files != NULL) {
-    	if (dir != NULL)
+        if (dir != NULL)
             str = mx_path_to_dir(files->data, dir);
         else
         	str = files->data;
-        lstat(str, &buff);
+        stat(str, &buff);
         socets(&buff);
         attributes_and_acl(str);
         mx_printchar(' ');
-    mx_printstr(files->data);
-    // mx_printchar(' ');   
-    // printf("%s", ctime(&buff.st_mtime));
-    mx_printchar('\n');
+        mx_printstr(files->data);
+        mx_printchar('\n');
         files = files->next;
     }
 }

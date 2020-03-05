@@ -1,20 +1,21 @@
 #include "uls.h"
 
-char *mx_path_to_dir(char *str, char *argv) {
-    int i = 0;
+char *mx_path_to_dir(char *str, char *dir) {
+    int i = mx_strlen(dir);
     char *trs = NULL;
 
-    for (; str[i + 1] != '\0'; i++);
-    if (argv[0] != '.') {
-        if (str[i] == '/') {
-            trs = mx_strjoin(argv, str);
-        }
-        else {
-    	    trs = mx_strjoin(mx_strcat(argv, "/"), str);
-        }
+    if (dir[0] != '.') {
+        if (dir[i - 1] != '/')
+            dir = mx_strcat(dir, "/");
+        trs = mx_strjoin(dir, str);
     }
-    else {
-    	trs = str;
+    else if (dir[1] == '.') {
+        if (dir[i - 1] != '/')
+            dir = mx_strcat(dir, "/");
+        trs = mx_strjoin(dir, str);
     }
+    else
+        trs = str;
+
     return trs;
 }
