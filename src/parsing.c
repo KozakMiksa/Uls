@@ -48,6 +48,7 @@ static void distributor(char *argv, t_list **parser) {
     }
     else
         add_to_parser(argv, parser, 4);
+    close(fd);
 }
 
 // static void print_parser(t_list **parser) {

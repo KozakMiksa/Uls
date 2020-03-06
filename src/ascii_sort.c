@@ -11,6 +11,7 @@ void mx_ascii_sort(t_list **l) {
                     tmp = j->data;
                     j->data = j->next->data;
                     j->next->data = tmp;
+
                 }
             }
         }

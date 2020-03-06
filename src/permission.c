@@ -17,15 +17,15 @@ void mx_permission(t_list *names, int flows) {
 
     while (names != NULL) {
         str = name_permission(names->data);
-        if (flows > 0) {
+        if (flows > 0|| names->next != NULL) {
             write(2, names->data, mx_strlen(names->data));
             write(2, ": \n", 3);
         }
         write(2, "uls: ", 5);
         write(2, str, mx_strlen(str));
         write(2, ": Permission denied\n", 20);
-        names = names->next;
-        if (flows > 0)
+        if (flows > 0 || names->next != NULL)
             write(2, "\n", 1);
+        names = names->next;
     }
 }
