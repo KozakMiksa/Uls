@@ -3,9 +3,11 @@
 static void get_size(t_list **names, int list_size, char *dir) {
     struct stat buff;
     t_size *with_s = malloc(sizeof(t_size) * list_size);
-dir = NULL; /////////////////////////////////////////////////////////////////////////
+char *str = NULL; /////////////////////////////////////////////////////////////////////////
+
     for (int i = 0; i < list_size; i++) {
-        stat((*names)->data, &buff);
+        str = mx_path_to_dir((*names)->data, dir);
+        lstat(str, &buff);
         with_s[i].name = (*names)->data;
         with_s[i].size = buff.st_size;
         mx_pop_front(names);
