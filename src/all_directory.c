@@ -60,14 +60,21 @@ static t_list *names_in_list(char *name, char flag) {
     return names_dir;
 }
 
-void mx_all_directory(t_list *dir, t_list *flags) {
+void mx_all_directory(t_list *dir, t_list *flags, int flows) {
     char flag = mx_get_flag(flags, "aA", 'C');
     t_list *names = NULL;
+    int i = mx_list_size(dir);
 
 
     while (dir != NULL) {
         names = names_in_list(dir->data, flag);
+        if (i > 1 || flows > 0) {
+            mx_printstr(dir->data);
+            mx_printstr(":\n");
+        }
         mx_print_for_dir(names, flags, dir->data);
+        if (dir->next != NULL)
+            mx_printchar('\n');
         dir = dir->next;
     }
 }

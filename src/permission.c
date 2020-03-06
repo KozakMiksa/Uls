@@ -14,10 +14,11 @@ static char *name_permission(char *str) {
 
 void mx_permission(t_list *names, int flows) {
     char *str = NULL;
+    int i = mx_list_size(names);
 
     while (names != NULL) {
         str = name_permission(names->data);
-        if (flows > 0|| names->next != NULL) {
+        if (flows > 0|| i > 1 ) {
             write(2, names->data, mx_strlen(names->data));
             write(2, ": \n", 3);
         }

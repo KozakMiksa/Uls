@@ -1,16 +1,6 @@
 #include "uls.h"
 
-// static int count_flows(t_list **parser) {
-//     int count = -1;
-
-//     for (int i = 2; i < 5; i++)
-//         if (parser[i] != NULL)
-//             count++;
-//     return count;
-// }
-
 void mx_uls(t_list **parser) {
-    // int flows = count_flows(parser);
     int check = 0;
 
     for (int i = 1; i < 5; i++)
@@ -24,5 +14,8 @@ void mx_uls(t_list **parser) {
     if (parser[4] != NULL)
         check = 1;
     mx_permission(parser[3], check);
-    mx_all_directory(parser[4], parser[0]);
+    check = 0;
+    if (parser[1] != NULL || parser[2] != NULL || parser[3] != NULL)
+        check = 1;
+    mx_all_directory(parser[4], parser[0], check);
 }
