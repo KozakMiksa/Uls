@@ -3,6 +3,7 @@
 static char *str_with_true_flags(char **argv, int argc);
 static void print_usage_error(char **argv, int i, int k);
 static void create_matrix_of_flags(t_flags *true_flags);
+static int len_true_flags(char **argv, int argc);
 
 t_list **mx_usage_error(int argc, char **argv, char *usage_flags) {
     int x = 0;
@@ -16,8 +17,12 @@ t_list **mx_usage_error(int argc, char **argv, char *usage_flags) {
         if (argv[i][0] == '-' && argv[i][1] != '\0') {
             for (int k = 1; argv[i][k] != '\0'; k++)
                 if (argv[i][0] == '-') {
-                    if (mx_get_index(usage_flags, argv[i][k]) == -1)
-                        print_usage_error(argv, i, k);
+                    if (mx_get_index(usage_flags, argv[i][k]) == -1) {
+                        if (mx_strcmp(argv[i], "--") == 0)
+                            x = i;
+                        else 
+                            print_usage_error(argv, i, k);
+                    }
                     else
                         mx_select_flags(&true_flags, argv[i][k]);
                 }
@@ -56,25 +61,38 @@ static void print_usage_error(char **argv, int i, int k) {
     exit(0);
 }
 
+static int len_true_flags(char **argv, int argc) {
+    int size = 0;
+    int i = 1;
+    int k = 1;
+
+    for (i = 1; i < argc && argv[i][0] == '-'; i++)
+        if (argv[i][0] == '-' && argv[i][1] != '\0')
+            for (k = 1; argv[i][k] != '\0'; k++)
+                if (argv[i][0] == '-' && argv[i][1] != '-')
+                    size = size + mx_strlen(argv[i]) - 1;
+    return size;
+}
+
 static char *str_with_true_flags(char **argv, int argc) {
     char *str = NULL;
     int size = 0;
     int j = 0;
     int i = 1;
     int k = 1;
-    
-    for (i = 1; i < argc; i++)
-        if (argv[i][0] == '-' && argv[i][1] != '\0')
-            for (k = 1; argv[i][k] != '\0'; k++)
-                if (argv[i][0] == '-')
-                    size = size + mx_strlen(argv[i]) - 1;
+
+    size = len_true_flags(argv, argc);
     str = mx_strnew(size);
-    for (i = 1; i < argc; i++)
+    for (i = 1; i < argc && argv[i][0] == '-'; i++)
         if (argv[i][0] == '-' && argv[i][1] != '\0')
             for (k = 1; argv[i][k] != '\0'; k++)
                 if (argv[i][0] == '-') {
-                    str[j] = argv[i][k];
-                    j++;
+                    if (mx_strcmp(argv[i],"--") == 0)
+                        return str;
+                    else {
+                        str[j] = argv[i][k];
+                        j++;
+                    }
                 }
     return str;
 }
