@@ -6,6 +6,15 @@ void mx_print_l(t_list *files, char *str) {
     struct group *gr;
 
     lstat(str, &buff);
+    char *linkname = malloc((128) * sizeof(char));
+    // printf("%lld\n", buff.st_blocks);
+    int i = 0;
+    if ((buff.st_mode & MX_IFMT) == MX_ISLNK) {
+
+    	i = readlink(str, linkname, 128);
+    	// printf("%lld\n", buff.st_blocks);
+    	linkname[i] = '\0';
+    }
     mx_socets(&buff, str);
     mx_printchar(' ');
     mx_printint(buff.st_nlink);
@@ -26,17 +35,12 @@ void mx_print_l(t_list *files, char *str) {
     mx_printchar(' ');
     /////////////////////////////////
     mx_printstr(files->data);
-
-    char *linkname = malloc((buff.st_size + 1) * sizeof(char));
-    int i = 0;
-    if ((buff.st_mode & MX_IFMT) == MX_ISLNK) {
+  if ((buff.st_mode & MX_IFMT) == MX_ISLNK) {
     	mx_printstr(" -> ");
-    	printf("%lld ", buff.st_size);
-    	i = readlink(str, linkname, buff.st_size + 1);
-    	linkname[i] = '\0';
-    	printf("%d\n", i);
     	mx_printstr(linkname);
     }
-    //free(&buff);
+
+   
+    // //free(&buff);
     mx_printchar('\n');
 }
