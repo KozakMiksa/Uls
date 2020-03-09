@@ -119,7 +119,9 @@ void mx_mult_colum(t_list *names, int win_size, int longest, int size_list);
 void mx_r_sort(t_list **names);
 char *mx_path_to_dir(char *str, char *dir);
 void mx_print_for_dir(t_list *files, t_list *flags, char *dir);
-void mx_print_l(t_list *files, char *str);
+void mx_print_l(t_list *files, char *str, struct s_size_colum *sc);
 void mx_socets(struct stat *buff, char *files);
+
+int mx_size_colum(int buf);
 
 #endif

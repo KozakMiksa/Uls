@@ -50,5 +50,6 @@ void mx_socets(struct stat *buff, char *files) {
         mx_printchar('+');
     else
         mx_printchar(' ');
+    mx_printchar(' ');
     acl_free(acl);
 }
