@@ -5,10 +5,10 @@ void mx_push_back(t_list **list, void *data) {
     t_list *s = NULL;
 
     if (*list == NULL)
-    	*list = new_node;
+        *list = new_node;
     else {
         s = *list;
-        while(s->next != NULL)
+        while (s->next != NULL)
             s = s->next;
         s->next = new_node;
     }

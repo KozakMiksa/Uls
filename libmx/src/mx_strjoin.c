@@ -1,4 +1,5 @@
 #include "libmx.h"
+
 char *mx_strjoin(const char *s1, const char *s2) {
     char *str1 = NULL;
     char *str2 = NULL;

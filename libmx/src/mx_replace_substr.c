@@ -1,48 +1,23 @@
 #include "libmx.h"
-char *mx_replace_substr(const char *str, const char *sub, const char *replace)
-{
-    if (str == NULL || sub == NULL || replace == NULL)
-    {
-	   return NULL;
+
+char *mx_replace_substr(const char *str, const char *sub,
+                        const char *replace) {
+    int diff = mx_strlen(sub) - mx_strlen(replace);
+    char *res = NULL;
+
+    if (str == NULL || sub == NULL || replace == NULL) 
+        return NULL;
+    if (diff < 0)
+        diff = -diff;
+    res = mx_strnew(mx_strlen(str) + mx_count_substr(str, sub) * diff);
+    for (int i = 0, k = 0; i < mx_strlen(str); i++) {
+        if (!mx_get_substr_index(&str[i], sub)) {
+            for (int j = 0; j < mx_strlen(replace); j++, k++)
+                res[k] = replace[j];
+            i = i + mx_strlen(sub) - 1;
+        } 
+        else
+            res[k++] = str[i];
     }
-    int size_str = mx_strlen(str);
-    int size_sub = mx_strlen(sub);
-    int size_replace = mx_strlen(replace);
-    int count = mx_count_substr(str, sub);
-    int size = size_str + (size_replace - size_sub) * count;
-    char *s = mx_strnew(size);
-    char *copys = s;
-    int j = 0;
-    while(j < count)
-    {
-        int i = 0;
-        int k = 0;
-        char *sc = mx_strstr(str, sub);
-        while(str != sc)
-        {
-            *copys = *str;
-            copys++;
-            str++;
-        }
-        while(i < size_replace)
-        {
-              *copys = replace[i];
-              i++;
-              copys++;
-              str++;
-        }
-        j++;
-	while(k < size_sub - size_replace)
-	{
-	    k++;
-	    str++;
-	}
-    }
-    while(*str != '\0')
-    {
-	*copys = *str;
-	copys++;
-        str++;
-    }
-    return s;
+    return res;
 }
