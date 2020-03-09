@@ -1,20 +1,16 @@
 #include "libmx.h"
-void *mx_memrchr(const void *s, int c, size_t n)
-{
+
+void *mx_memrchr(const void *s, int c, size_t n) {
+    unsigned int i = 0;
     unsigned char *str = (unsigned char *)s;
-    while(*str != '\0')
-    {
-	str++;
-    }
-    size_t i = 0;
-    while(i < n)
-    {
-	if (*str == c)
-	{
-	    return str;
-	}
-	str--;
-	i++;
+
+    while (*str != '\0')
+        str++;
+    while (i < n) {
+        if (*str == c)
+            return str;
+        i++;
+        str--;
     }
     return NULL;
 }
