@@ -26,5 +26,17 @@ void mx_print_l(t_list *files, char *str) {
     mx_printchar(' ');
     /////////////////////////////////
     mx_printstr(files->data);
+
+    char *linkname = malloc((buff.st_size + 1) * sizeof(char));
+    int i = 0;
+    if ((buff.st_mode & MX_IFMT) == MX_ISLNK) {
+    	mx_printstr(" -> ");
+    	printf("%lld ", buff.st_size);
+    	i = readlink(str, linkname, buff.st_size + 1);
+    	linkname[i] = '\0';
+    	printf("%d\n", i);
+    	mx_printstr(linkname);
+    }
+    //free(&buff);
     mx_printchar('\n');
 }

@@ -7,7 +7,9 @@ static void get_time(t_list **names, int list_size, char *dir, t_list *flags) {
     char *str = NULL;
 
     for (int i = 0; i < list_size; i++) {
-        str = mx_path_to_dir((*names)->data, dir);
+        str = (*names)->data;
+        if (dir != NULL)
+            str = mx_path_to_dir((*names)->data, dir);
         lstat(str, &buff);
         with_t[i].name = (*names)->data;
         if (flag == 't')

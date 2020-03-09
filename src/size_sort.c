@@ -3,10 +3,13 @@
 static void get_size(t_list **names, int list_size, char *dir) {
     struct stat buff;
     t_size *with_s = malloc(sizeof(t_size) * list_size);
-char *str = NULL; /////////////////////////////////////////////////////////////////////////
+    char *str = NULL;
 
     for (int i = 0; i < list_size; i++) {
-        str = mx_path_to_dir((*names)->data, dir);
+        if (dir != NULL)
+            str = mx_path_to_dir((*names)->data, dir);
+        else
+            str = (*names)->data;
         lstat(str, &buff);
         with_s[i].name = (*names)->data;
         with_s[i].size = buff.st_size;
@@ -36,11 +39,3 @@ void mx_size_sort(t_list **names, char *dir) {
         list_size--;
     }
 }
-
-// while (*names != NULL) {
-//         mx_printstr(((t_size *)(*names)->data)->name);
-//         mx_printchar(' ');
-//         mx_printint(((t_size *)(*names)->data)->size);
-//         mx_printchar('\n');
-//         *names = (*names)->next;
-//     }

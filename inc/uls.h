@@ -74,6 +74,13 @@ typedef struct s_time {
     int t;
 }              t_time;
 
+struct s_size_colum {
+    int nlink;
+    int uid;
+    int gid;
+    int size;
+};
+
 t_list **mx_usage_error(int argc, char **argv, char *usage_flags);
 void mx_principal_printable_flag(t_flags *true_flags, char *str);
 void mx_select_flags(t_flags *true_flags, char flag);
