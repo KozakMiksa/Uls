@@ -1,5 +1,19 @@
 #include "uls.h"
 
+static void minor_major(struct stat *buff) {
+    char *major = NULL;
+    char *minor = NULL;
+    int major_num = MX_MAJOR(buff->st_rdev);
+    int minor_num = MX_MINOR(buff->st_rdev);
+
+    major = mx_itoa(major_num);
+    minor = mx_itoa(minor_num);
+    mx_printstr(major);
+    mx_printstr(", ");
+    mx_printstr(minor);
+    mx_printchar(' ');
+}
+
 void mx_print_l(t_list *files, char *str) {
     struct stat buff;
     struct passwd *pw;
@@ -31,8 +45,13 @@ void mx_print_l(t_list *files, char *str) {
     	mx_printint(buff.st_gid);
     mx_printchar(' ');
     /////////////////////////////////
-    mx_printint(buff.st_size);
-    mx_printchar(' ');
+    if ((buff.st_mode & MX_IFMT) == MX_ISCHR ||
+        (buff.st_mode & MX_IFMT) == MX_ISBLK)
+        minor_major(&buff);
+    else {
+        mx_printint(buff.st_size);
+        mx_printchar(' ');
+    }
     /////////////////////////////////
     mx_printstr(files->data);
   if ((buff.st_mode & MX_IFMT) == MX_ISLNK) {

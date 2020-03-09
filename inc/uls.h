@@ -42,6 +42,9 @@
 
 #define MX_IFMT 0170000
 
+#define MX_MAJOR(x) ((int32_t)(((u_int32_t)(x) >> 24) & 0xff))
+#define MX_MINOR(x) ((int32_t)((x) & 0xffffff))
+
 typedef struct s_flags {
     int a;
     int f;
