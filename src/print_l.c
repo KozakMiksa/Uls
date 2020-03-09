@@ -37,22 +37,39 @@ static void nlink(struct stat *buff, int size) {
     mx_printchar(' ');
 }
 
-static void uid(struct stat *buff) {
-    struct passwd *pw;
-
-    pw = getpwuid(buff->st_uid);
+static void uid(struct stat *buff, int size) {
+    struct passwd *pw = getpwuid(buff->st_uid);
+    int i = mx_strlen(pw->pw_name);
+    
     mx_printstr(pw->pw_name);
+    while (i < size) {
+    	mx_printchar(' ');
+    	i++;
+    }
     mx_printstr("  ");
 }
 
-static void gid(struct stat *buff) {
+static void gid(struct stat *buff, int size) {
     struct group *gr;
+    int i = 0;
 
     gr = getgrgid(buff->st_gid);
-    if (gr != NULL)
-        mx_printstr(gr->gr_name);
-    else
-        mx_printint(buff->st_gid);
+    if (gr != NULL) {
+    	i = mx_strlen(gr->gr_name);
+    	mx_printstr(gr->gr_name);
+    	while (i < size) {
+    	    mx_printchar(' ');
+    	    size--;
+    	}
+    }
+    else {
+    	i = mx_size_colum(buff->st_gid);
+    	mx_printint(buff->st_gid);
+    	while (i < size) {
+    	    mx_printchar(' ');
+    	    size--;
+    	}
+    }
     mx_printstr("  ");
 }
 
@@ -76,11 +93,15 @@ static void mx_time(struct stat *buff) {
     char *time = ctime(&buff->st_mtime);
     char **arr = mx_strsplit(time, ' ');
 
-    for (int i = 0; arr[i] != NULL ; i++)
-    {
-    	printf("%s\n", arr[i]);
-    }
-    mx_strdel(&time);
+    mx_printstr(arr[1]);
+    mx_printstr(" ");
+    if (mx_strlen(arr[2]) == 1)
+    	mx_printchar(' ');
+    mx_printstr(arr[2]);
+    mx_printchar(' ');
+    for (int i = 0; i < 5; i++)
+        mx_printchar(arr[3][i]);
+    mx_printchar(' ');
 }
 
 void mx_print_l(t_list *files, char *str, struct s_size_colum *sc) {
@@ -91,8 +112,8 @@ void mx_print_l(t_list *files, char *str, struct s_size_colum *sc) {
     link = linkname(&buff, str);
     mx_socets(&buff, str);
     nlink(&buff, sc->nlink);
-    uid(&buff);
-    gid(&buff);
+    uid(&buff, sc->uid);
+    gid(&buff, sc->gid);
     size_mm(&buff, sc->size);
     mx_time(&buff);
     mx_printstr(files->data);

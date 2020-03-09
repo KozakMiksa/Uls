@@ -1,40 +1,33 @@
 #include "libmx.h"
 
-int mx_quicksort(char **arr, int left, int right) {
-    int sum = 0;
-    if (!arr) return -1;
-    if (left < right)
-    {
-        int first = left, last = right;
-        char *middle = arr[(first + last) / 2];
-        for (; mx_strlen(arr[first]) < mx_strlen(middle); first++);
-        for (; mx_strlen(arr[last]) > mx_strlen(middle); last--);
-        if (first <= last)
-        {
-            if (mx_strlen(arr[first]) != mx_strlen(arr[last]) 
-                    && arr[first] != arr[last]) sum++; 
-            char *tmp = arr[first];
-            arr[first] = arr[last];
-            arr[last] = tmp;
-            first++;
-            last--;
-        }
-        while (first <= last) {
-            while (mx_strlen(arr[first]) < mx_strlen(middle)) first++;
-            while (mx_strlen(arr[last]) > mx_strlen(middle)) last--;
-            if (first <= last)
-            {
-                if (mx_strlen(arr[first]) != mx_strlen(arr[last]) 
-                    && arr[first] != arr[last]) sum++; 
-                char *tmp = arr[first];
-                arr[first] = arr[last];
-                arr[last] = tmp;
-                first++;
-                last--;
-            }
-        }
-        sum += mx_quicksort(arr, left, last);
-        sum += mx_quicksort(arr, first, right);
+static void swap(char ***a, int *low, int *high, int *count) {
+    char **arr = *a;
+
+    if (mx_strlen(arr[*low]) > mx_strlen(arr[*high])) {
+        (*count)++;
+        mx_swap_str(&arr[*low], &arr[*high]);
     }
-    return sum;
+    (*low)++;
+    (*high)--;
+}
+
+int mx_quicksort(char **arr, int left, int right) {
+    int count = 0;
+    int low = left;
+    int high = right;
+    int pivot = (high + low) / 2;
+
+    if (arr == NULL || *arr == NULL)
+        return -1;
+    if (left < right) {
+        while (low <= high) {
+            for (; mx_strlen(arr[low]) < mx_strlen(arr[pivot]); low++);
+            for (; mx_strlen(arr[high]) > mx_strlen(arr[pivot]); high--);
+            if (low <= high)
+                swap(&arr, &low, &high, &count);
+        }
+        count += mx_quicksort(arr, left, high);
+        count += mx_quicksort(arr, low, right);
+    }
+    return count;
 }

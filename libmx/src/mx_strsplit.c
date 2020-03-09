@@ -1,37 +1,32 @@
 #include "libmx.h"
-int strlen_mod(const char *s, char c)
-{
+
+static int strlen_mod(const char *s, char c) {
     int count = 0;
-    while(*s != c && *s != '\0')
-    {
-	count++;
+
+    while (*s != c && *s != '\0') {
+        count++;
         s++;
     }
     return count;
 }
+
 char **mx_strsplit(const char *s, char c) {
-    char *ss = s;
+    int size = mx_count_words(s, c);
+    char **arr = malloc((size + 1) * sizeof(char *));
+    int j = 0;
 
     if (s == NULL)
-    {
-	return NULL;
-    }
-    int size = mx_count_words(ss, c);
-    char **arr = malloc((size + 1) * sizeof(char *));
-    for(int i = 0; i < size; i++)
-    {
-	while(*ss == c && *ss != '\0')
-	{
-	    ss++;
-	}
-	arr[i] = mx_strnew(strlen_mod(ss, c));
-	int j = 0;
-	while(*ss != c && *ss != '\0')
-	{
-	    arr[i][j] = *ss;
-	    ss++;
-	    j++;
-	}
+        return NULL;
+    for (int i = 0; i < size; i++) {
+        while (*s == c && *s != '\0')
+             s++;
+        arr[i] = mx_strnew(strlen_mod(s, c));
+        j = 0;
+        while (*s != c && *s != '\0') {
+            arr[i][j] = *s;
+            s++;
+            j++;
+        }
     }
     arr[size] = NULL;
     return arr;

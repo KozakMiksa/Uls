@@ -1,12 +1,8 @@
 #include "libmx.h"
-void mx_str_reverse(char *s)
-{
-	int size = mx_strlen(s);
-	for(int i = 0; i < size - 1; i++)
-	{
-		for (int j = 0; j < size - i - 1; j++)
-		{
-			mx_swap_char(&s[j], &s[j + 1]);
-		}
-	}
+
+void mx_str_reverse(char *s) {
+    if (!s)
+        return;
+    for (int i = 0; i < mx_strlen(s) / 2; i++)
+        mx_swap_char(&s[i], &s[mx_strlen(s) - i - 1]);
 }

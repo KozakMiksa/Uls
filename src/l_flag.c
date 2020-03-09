@@ -10,10 +10,25 @@ int mx_size_colum(int buf) { // Нужно сделать глобальной
     return size;
 }
 
+static void size_name(struct stat *buff, int *uid, int *gid) {
+    struct passwd *pw = getpwuid(buff->st_uid);
+    struct group *gr = getgrgid(buff->st_gid);
+
+    if (mx_strlen(pw->pw_name) > *uid)
+        *uid = mx_strlen(pw->pw_name);
+    if (gr != NULL) {
+        if (mx_strlen(gr->gr_name) > *gid)
+            *gid = mx_strlen(gr->gr_name);
+    }
+    else
+        if (mx_size_colum(buff->st_gid) > *gid)
+            *gid = mx_size_colum(buff->st_gid);
+}
+
 static void size_colum(struct s_size_colum *sc, t_list *files, char *dir) {
     char *str = NULL;
     struct stat buff;
-    // struct passwd *pw;
+
     // struct group *gr;
 
     while (files != NULL) {
@@ -26,6 +41,7 @@ static void size_colum(struct s_size_colum *sc, t_list *files, char *dir) {
             sc->nlink = mx_size_colum(buff.st_nlink);
         if (sc->size < mx_size_colum(buff.st_size))
             sc->size = mx_size_colum(buff.st_size);
+        size_name(&buff, &sc->uid, &sc->gid); 
         files = files->next;
     }
 }
