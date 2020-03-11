@@ -16,6 +16,5 @@ char *mx_path_to_dir(char *str, char *dir) {
     }
     else
         trs = str;
-
     return trs;
 }

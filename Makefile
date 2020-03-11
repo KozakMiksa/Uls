@@ -37,6 +37,10 @@ path_to_dir.c \
 print_for_dir.c \
 print_l.c \
 socets.c \
+interceptor.c \
+size_colum.c \
+size_mm.c \
+time.c \
 
 OBJ = main.o \
 parsing.o \
@@ -71,6 +75,10 @@ path_to_dir.o \
 print_for_dir.o \
 print_l.o \
 socets.o \
+interceptor.o \
+size_colum.o \
+size_mm.o \
+time.o \
 
 
 all: install clean

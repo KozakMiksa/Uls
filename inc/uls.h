@@ -82,6 +82,8 @@ struct s_size_colum {
     int uid;
     int gid;
     int size;
+    int maj;
+    int min;
 };
 
 t_list **mx_usage_error(int argc, char **argv, char *usage_flags);
@@ -121,6 +123,9 @@ char *mx_path_to_dir(char *str, char *dir);
 void mx_print_for_dir(t_list *files, t_list *flags, char *dir);
 void mx_print_l(t_list *files, char *str, struct s_size_colum *sc);
 void mx_socets(struct stat *buff, char *files);
+char mx_interceptor(void);
+void mx_size_mm(struct stat *buff, struct s_size_colum *sc, char *cn);
+void mx_time(struct stat *buff);
 
 int mx_size_colum(int buf);
 

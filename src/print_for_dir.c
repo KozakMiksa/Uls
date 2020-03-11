@@ -11,7 +11,7 @@ static void print_total(t_list *files, char *dir) {
             str = mx_path_to_dir(cp_files->data, dir);
         else
             str = cp_files->data;
-        stat(str, &buff);
+        lstat(str, &buff);
         total += buff.st_blocks;
         cp_files = cp_files->next;
     }
@@ -22,7 +22,7 @@ static void print_total(t_list *files, char *dir) {
 
 void mx_print_for_dir(t_list *files, t_list *flags, char *dir) {
     struct winsize ws;
-    char flag = mx_get_flag(flags, "l1m", 'C');
+    char flag = mx_get_flag(flags, "l1m", mx_interceptor());
 
     ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
     if (files != NULL)

@@ -29,8 +29,8 @@ void mx_m_flag(t_list *files, t_list *flags, int ws_size, char *dir) {
         mx_r_sort(&files);
     print_flag_m(files, ws_size);
     mx_printchar('\n');
-        while (files != NULL) {
-            free(files->data);
-            mx_pop_front(&files);
-        }
+        // while (files != NULL) {
+        //     free(files->data);
+        //     mx_pop_front(&files);
+        // }
 }

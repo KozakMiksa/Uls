@@ -13,8 +13,8 @@ void mx_one_flag(t_list *files, t_list *flags, char *dir) {
         mx_printchar('\n');
         files = files->next;
     }
-    while (cp_files != NULL) {
-            free(cp_files->data);
-            mx_pop_front(&cp_files);
-    }
+    // while (cp_files != NULL) {
+    //         free(cp_files->data);
+    //         mx_pop_front(&cp_files);
+    // }
 }

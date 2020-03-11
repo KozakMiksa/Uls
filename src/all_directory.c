@@ -60,11 +60,22 @@ static t_list *names_in_list(char *name, char flag) {
     return names_dir;
 }
 
+static void free_list(t_list *names) { // сделать глобальной, проверить где можно юзать еще
+    t_list *cp = names;
+
+    while (names != NULL) {
+        free(names->data);
+        names = names->next;
+    }
+    while (cp != NULL) {
+        mx_pop_front(&cp);
+    }
+}
+
 void mx_all_directory(t_list *dir, t_list *flags, int flows) {
     char flag = mx_get_flag(flags, "aA", 'C');
     t_list *names = NULL;
     int i = mx_list_size(dir);
-
 
     while (dir != NULL) {
         names = names_in_list(dir->data, flag);
@@ -75,6 +86,8 @@ void mx_all_directory(t_list *dir, t_list *flags, int flows) {
         mx_print_for_dir(names, flags, dir->data);
         if (dir->next != NULL)
             mx_printchar('\n');
+        free_list(names);
+        // free(dir->data);
         dir = dir->next;
     }
 }
