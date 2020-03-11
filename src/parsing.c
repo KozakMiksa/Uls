@@ -14,7 +14,7 @@ t_list **mx_parsing(int i, int argc, char **argv, t_flags *true_flags) {
     mx_check_flags_second(parser, true_flags);
     if (i == 0)
         parser[4] = mx_create_node(".");
-    else
+    else 
         for (; i < argc; i++)
             distributor(argv[i], parser);
     // print_parser(parser);
@@ -49,6 +49,7 @@ static void distributor(char *argv, t_list **parser) {
     else
         add_to_parser(argv, parser, 4);
     close(fd);
+    closedir(dir);
 }
 
 // static void print_parser(t_list **parser) {

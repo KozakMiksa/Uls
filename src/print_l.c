@@ -1,9 +1,11 @@
 #include "uls.h"
 
 static char *linkname(struct stat *buff, char *str) {
-    char *linkname = malloc((128) * sizeof(char));
+    char *linkname = NULL;
     int i = 0;
+
     if ((buff->st_mode & MX_IFMT) == MX_ISLNK) {
+        linkname = malloc((128) * sizeof(char));
         i = readlink(str, linkname, 128);
         linkname[i] = '\0';
     }
@@ -78,5 +80,4 @@ void mx_print_l(t_list *files, char *str, struct s_size_colum *sc) {
     	mx_strdel(&link);
     }
     mx_printchar('\n');
-    // mx_strdel(&str);
 }

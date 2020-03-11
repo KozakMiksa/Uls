@@ -87,7 +87,7 @@ static char *str_with_true_flags(char **argv, int argc) {
         if (argv[i][0] == '-' && argv[i][1] != '\0')
             for (k = 1; argv[i][k] != '\0'; k++)
                 if (argv[i][0] == '-') {
-                    if (mx_strcmp(argv[i],"--") == 0)
+                    if (mx_strcmp(argv[i], "--") == 0)
                         return str;
                     else {
                         str[j] = argv[i][k];

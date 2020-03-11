@@ -7,14 +7,18 @@ static void print_total(t_list *files, char *dir) {
     struct stat buff;
 
     while (cp_files != NULL) {
-        if (dir != NULL)
+        if (dir != NULL) {
             str = mx_path_to_dir(cp_files->data, dir);
+        }
         else
             str = cp_files->data;
         lstat(str, &buff);
         total += buff.st_blocks;
         cp_files = cp_files->next;
+        // if (dir != NULL)
+        //     free(str);
     }
+
     mx_printstr("total ");
     mx_printint(total);
     mx_printchar('\n');
